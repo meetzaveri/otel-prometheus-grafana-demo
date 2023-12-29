@@ -1,0 +1,27 @@
+global:
+  scrape_interval: 1s
+  evaluation_interval: 2s
+scrape_configs:
+  # - job_name: "prometheus"
+  #   static_configs:
+  #     - targets: ["localhost:9090"]
+  - job_name: "otel-collector"
+    scrape_interval: 1s
+    # metrics_path: "/metrics"
+    static_configs:
+      - targets: ["host.docker.internal:8889"]
+      # - targets: ["host.docker.internal:8888"]
+  - job_name: "hasura_prometheus_exporter"
+    scrape_interval: 1s ## Recommended scrape interval is 60s
+    metrics_path: "/metrics" ## Replace with metrics Path of the connection URL
+    scheme: "https" ## Replace with the scheme of the connection URL
+    basic_auth:
+      username: "690376dd-1f5f-4973-aeda-bb53adbd6295" ## Replace with project ID
+      password: "107Y2+5KrpAMXQok0jyj" ## Replace with Access Token
+    static_configs:
+      - targets: ["prometheus-exporter.pro.hasura.io"] ## Replace with the host name of the connection URL
+# remote_write:
+#   - url: https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push
+#     basic_auth:
+#       username: 1018679
+#       password: glc_eyJvIjoiODY5OTczIiwibiI6InN0YWNrLTY1ODkwMC1obS1yZWFkLXByb21ldGhldXMtdGVzdCIsImsiOiJaREY5MkgzMVI0MDNKdFpjT0RiOHFrOTQiLCJtIjp7InIiOiJwcm9kLXVzLWVhc3QtMCJ9fQ==
